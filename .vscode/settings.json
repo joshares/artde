@@ -1,0 +1,7 @@
+{
+  "editor.lineHeight": 1,
+  "editor.scrollbar.horizontalScrollbarSize": 12,
+  "editor.fontSize": 22,
+  "editor.defaultFoldingRangeProvider": "esbenp.prettier-vscode",
+  "editor.wordWrap": "on"
+}
