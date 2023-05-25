@@ -39,10 +39,13 @@ export default function Navbar() {
         </ul>
         <section className="flex items-center gap-4 ">
           <AiOutlineUser />
-          <div className="flex items-center p-1 border rounded-md border-black gap-2">
+          <Link
+            href="/cart"
+            className="flex items-center p-1 border rounded-md border-black gap-2"
+          >
             <CiShoppingCart />
             <p>0 items</p>
-          </div>
+          </Link>
           <button>Login</button>
         </section>
       </nav>
