@@ -2,24 +2,46 @@ import React, { useState } from "react";
 import demo from "../../public/intro.png";
 import Image from "next/image";
 import { AiTwotoneHeart, AiOutlineHeart } from "react-icons/ai";
+import Link from "next/link";
+import { ProductType } from "component/types";
 
-export default function Product() {
+type ProductPropType = {
+  product: ProductType;
+};
+
+export default function Product({ product }: ProductPropType) {
+  const {
+    urls,
+    width,
+    height,
+    alt_description: name,
+    likes: price,
+    id,
+  } = product;
   const [love, setLove] = useState<boolean>(false);
   return (
     <main className="w-full shadow-md ">
-      <Image src={demo} alt="product" className="w-full h-60 " />
-      <div className="flex justify-between text-xl uppercase p-2">
-        <p>
-          Unique steller <br />
-          <span>$56</span>
-        </p>
+      <Link href={`market/${id}`}>
+        <Image
+          src={urls.full}
+          width={800}
+          height={800}
+          alt="product"
+          className="w-full h-60 "
+        />
+      </Link>
+      <div className="flex justify-between  uppercase p-2 ">
+        <div className="w-5/6   ">
+          <p>{name}</p>
+          <p className="font-semibold">${price}</p>
+        </div>
         {love ? (
           <AiTwotoneHeart
-            className="text-red-700"
+            className="text-red-700 text-xl"
             onClick={() => setLove(!love)}
           />
         ) : (
-          <AiOutlineHeart onClick={() => setLove(!love)} />
+          <AiOutlineHeart className="text-xl" onClick={() => setLove(!love)} />
         )}
       </div>
     </main>

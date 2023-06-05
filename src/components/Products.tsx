@@ -1,13 +1,18 @@
 import React from "react";
 import Product from "./Product";
-
-const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+import { useSelector } from "react-redux";
+import { ProductStateType } from "component/types";
+import { ProductType } from "component/types";
 
 export default function Products() {
+  const { filtered_products: products } = useSelector(
+    (state: ProductStateType) => state.product
+  );
+
   return (
     <main className="w-full flex my-5 flex-col gap-5 md:grid grid-cols-3">
-      {data.map((d, id) => {
-        return <Product key={id} />;
+      {products.map((product: ProductType, i: number) => {
+        return <Product product={product} key={i} />;
       })}
     </main>
   );

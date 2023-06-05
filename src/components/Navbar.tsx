@@ -4,9 +4,17 @@ import Link from "next/link";
 import { CiShoppingCart } from "react-icons/ci";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { AiOutlineMenu, AiOutlineUser } from "react-icons/ai";
+import { useSelector, useDispatch } from "react-redux";
+import { ProductStateType } from "component/types";
+import { clearNumber } from "component/features/product/productSlice";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { amount } = useSelector((store: ProductStateType) => store.product);
+  const dispatch = useDispatch();
+
+  console.log(amount);
+
   return (
     <main className="relative ">
       <nav className="p-4 md:mx-14 flex justify-between items-center">
@@ -44,7 +52,7 @@ export default function Navbar() {
             className="flex items-center p-1 border rounded-md border-black gap-2"
           >
             <CiShoppingCart />
-            <p>0 items</p>
+            <p onClick={() => dispatch(clearNumber())}>{amount} items</p>
           </Link>
           <button>Login</button>
         </section>
