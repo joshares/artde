@@ -4,13 +4,17 @@ import demo from "../../public/ads2.png";
 import { BsCart } from "react-icons/bs";
 import Link from "next/link";
 import { useSelector } from "react-redux";
-import { ProductStateType } from "component/types";
+import { ProductStateType, SingleProductType } from "component/types";
 import { ProductType } from "component/types";
 
-export default function SingleProduct() {
-  const { single_product: product } = useSelector(
-    (state: ProductStateType) => state.product
-  );
+type singlePropType = {
+  product: SingleProductType;
+};
+
+export default function SingleProduct({ product }: singlePropType) {
+  // const { single_product: product } = useSelector(
+  // (state: ProductStateType) => state.product
+  // );
   const {
     urls,
     width,
@@ -26,7 +30,8 @@ export default function SingleProduct() {
       <div className="md:flex items-center gap-5">
         <section className="md:w-1/2">
           <Image
-            src={urls.raw}
+            src={urls?.full}
+            // src={demo}
             width={800}
             height={800}
             alt="demo"

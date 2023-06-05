@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { ProductType } from "../../types";
+import { ProductType, SingleProductType } from "../../types";
 
 const url =
   "https://api.unsplash.com/search/photos?client_id=1ImbsBsOVc9Ns6T4zmkFMuhIvdejywf8b3Mh96Tr6-g&query=artwork";
@@ -11,7 +11,7 @@ export type initialStateType = {
   filtered_products: any;
   amount: number;
   total: number;
-  single_product: any;
+  single_product: SingleProductType;
   single_loading: boolean;
   single_error: boolean;
   cart: any;
@@ -64,17 +64,10 @@ const initialState: initialStateType = {
   filtered_products: [],
   amount: 5,
   total: 0,
-  single_product: {},
+  single_product: {} as SingleProductType,
   single_loading: false,
   single_error: false,
-  cart: {
-    product: {
-      image: "",
-      name: "",
-      price: "",
-      amount: 0,
-    },
-  },
+  cart: [],
   frames: [],
 };
 
@@ -135,7 +128,7 @@ const productSlice = createSlice({
         state.single_loading = true;
         state.single_error = false;
       })
-      .addCase(singlePage.fulfilled, (state, action: PayloadAction<string>) => {
+      .addCase(singlePage.fulfilled, (state, action) => {
         state.single_loading = false;
         state.single_product = action.payload;
         console.log(action.payload);

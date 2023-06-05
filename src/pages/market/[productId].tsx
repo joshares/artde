@@ -11,13 +11,16 @@ import { singlePage } from "component/features/product/productSlice";
 export default function SingleProducts() {
   const router = useRouter();
   const id = router.query.productId as string;
-  const { single_loading: loading, single_error: error } = useSelector(
-    (state: ProductStateType) => state.product
-  );
+  const {
+    single_loading: loading,
+    single_error: error,
+    single_product: product,
+  } = useSelector((state: ProductStateType) => state.product);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(singlePage(id) as any);
+    console.log(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
@@ -45,7 +48,7 @@ export default function SingleProducts() {
         <BsArrowLeft />
         <p>Back to market</p>
       </Link>
-      <SingleProduct />
+      <SingleProduct product={product} />
     </main>
   );
 }

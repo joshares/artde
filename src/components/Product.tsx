@@ -27,6 +27,7 @@ export default function Product({ product }: ProductPropType) {
           width={800}
           height={800}
           alt="product"
+          priority
           className="w-full h-60 "
         />
       </Link>
