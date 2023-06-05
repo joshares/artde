@@ -1,21 +1,37 @@
 import React from "react";
 import Link from "next/link";
 import Carts from "component/components/Carts";
+import { useSelector } from "react-redux";
+import { ProductStateType } from "component/types";
 
-const data = [1, 2];
-export default function cart() {
+// const data = [1, 2];
+export default function Cart() {
+  const { cart, amount } = useSelector(
+    (state: ProductStateType) => state.product
+  );
+
+  if (amount < 1) {
+    return (
+      <main className="p-4 md:mx-14 text-center ">
+        <p className="uppercase my-5 text-center text-[#9A5630]">
+          cart is empty
+        </p>
+      </main>
+    );
+  }
+
   return (
     <main className="p-4 md:mx-14">
       <h1 className="uppercase my-5 text-center text-[#9A5630]">Cart items</h1>
       <div>
-        {data.map((d, id) => {
-          return <Carts key={id} />;
+        {cart.map((c, id) => {
+          return <Carts cart={c} key={id} />;
         })}
       </div>
       <footer className="md:flex-row flex-col flex md:justify-between uppercase ">
         <section className="md:w-1/2">
           <div className="flex justify-between items-center">
-            <p>Product in cart:</p>
+            <p>Product in C:</p>
             <p>1 items</p>
           </div>
           <div className="flex justify-between items-center">

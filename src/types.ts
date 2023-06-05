@@ -131,3 +131,12 @@ export type SingleProductType = {
   views: number;
   width: number;
 };
+
+export type CartType = {
+  image: string;
+  name: string;
+  amount: number;
+  id: string;
+  price: number;
+  total: number;
+};

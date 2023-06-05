@@ -10,11 +10,11 @@ export type initialStateType = {
   products: any;
   filtered_products: any;
   amount: number;
-  total: number;
+  totals: number;
   single_product: SingleProductType;
   single_loading: boolean;
   single_error: boolean;
-  cart: any;
+  cart: any[];
   frames: any;
 };
 
@@ -62,8 +62,8 @@ const initialState: initialStateType = {
   product_error: false,
   products: [],
   filtered_products: [],
-  amount: 5,
-  total: 0,
+  amount: 0,
+  totals: 0,
   single_product: {} as SingleProductType,
   single_loading: false,
   single_error: false,
@@ -75,9 +75,6 @@ const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
-    clearNumber(state) {
-      state.amount = 0;
-    },
     priceRange(state, action) {
       const price = action.payload;
       const newProducts = state.products.filter(
@@ -85,14 +82,20 @@ const productSlice = createSlice({
       );
       state.filtered_products = newProducts;
     },
-    // singlePage(state, action) {
-    //   const productId = action.payload;
-    //   const singleProduct = state.products.find(
-    //     (product: ProductType) => product.id === productId
-    //   );
-    //   console.log(productId);
-    //   state.single_product = singleProduct;
-    // },
+    addToCart(state, action) {
+      const total = state.single_product.likes * action.payload;
+      const cart = {
+        image: state.single_product.urls.raw,
+        name: state.single_product.alt_description,
+        price: state.single_product.likes,
+        id: state.single_product.id,
+        amount: action.payload,
+        total: total,
+      };
+      const amount = state.cart.length + 1;
+      state.amount = amount;
+      state.cart = [...state.cart, cart];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -140,6 +143,6 @@ const productSlice = createSlice({
   },
 });
 
-export const { clearNumber, priceRange } = productSlice.actions;
+export const { priceRange, addToCart } = productSlice.actions;
 
 export default productSlice.reducer;

@@ -6,7 +6,6 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { AiOutlineMenu, AiOutlineUser } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
 import { ProductStateType } from "component/types";
-import { clearNumber } from "component/features/product/productSlice";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -52,7 +51,7 @@ export default function Navbar() {
             className="flex items-center p-1 border rounded-md border-black gap-2"
           >
             <CiShoppingCart />
-            <p onClick={() => dispatch(clearNumber())}>{amount} items</p>
+            <p>{amount} items</p>
           </Link>
           <button>Login</button>
         </section>

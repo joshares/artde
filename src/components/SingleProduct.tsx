@@ -1,20 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import demo from "../../public/ads2.png";
 import { BsCart } from "react-icons/bs";
 import Link from "next/link";
-import { useSelector } from "react-redux";
-import { ProductStateType, SingleProductType } from "component/types";
-import { ProductType } from "component/types";
+import { SingleProductType } from "component/types";
+import demo from "../../public/ads1.png";
+import { addToCart } from "component/features/product/productSlice";
+import { useDispatch } from "react-redux";
 
 type singlePropType = {
   product: SingleProductType;
 };
 
 export default function SingleProduct({ product }: singlePropType) {
-  // const { single_product: product } = useSelector(
-  // (state: ProductStateType) => state.product
-  // );
+  const dispatch = useDispatch();
+  const [amount, setAmount] = useState(1);
   const {
     urls,
     width,
@@ -24,6 +23,14 @@ export default function SingleProduct({ product }: singlePropType) {
     downloads,
     id,
   } = product;
+
+  const handleDecrease = () => {
+    if (amount > 1) {
+      setAmount(amount - 1);
+    } else {
+      setAmount(1);
+    }
+  };
 
   return (
     <main>
@@ -46,11 +53,23 @@ export default function SingleProduct({ product }: singlePropType) {
           <p className="text-2xl font-bold">{downloads} Likes</p>
 
           <div className="flex gap-2 items-center  justify-center w-max border ">
-            <button className="p-2 border-r"> - </button>
-            <p>1</p>
-            <button className="p-2 border-l"> + </button>
+            <button className="p-2 border-r" onClick={handleDecrease}>
+              {" "}
+              -{" "}
+            </button>
+            <p>{amount}</p>
+            <button
+              className="p-2 border-l"
+              onClick={() => setAmount(amount + 1)}
+            >
+              {" "}
+              +{" "}
+            </button>
           </div>
-          <button className="flex items-center gap-2 bg-secondary p-2 text-white rounded-md shadow-md">
+          <button
+            className="flex items-center gap-2 bg-secondary p-2 text-white rounded-md shadow-md"
+            onClick={() => dispatch(addToCart(amount) as any)}
+          >
             <BsCart />
             <p>Add to cart</p>
           </button>
