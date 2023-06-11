@@ -15,12 +15,25 @@ export type initialStateType = {
   single_loading: boolean;
   single_error: boolean;
   cart: any[];
-  frames: any;
+  frames: any[];
+  frame_loading: boolean;
+  frame_error: boolean;
 };
 
 export const getProducts = createAsyncThunk("product/getProducts", async () => {
   try {
     const resp = await fetch(url);
+    const data = await resp.json();
+    return data.results;
+  } catch (err) {
+    console.log(err);
+  }
+});
+export const getFrames = createAsyncThunk("product/getFrames", async () => {
+  try {
+    const resp = await fetch(
+      "https://api.unsplash.com/search/photos?client_id=1ImbsBsOVc9Ns6T4zmkFMuhIvdejywf8b3Mh96Tr6-g&query=frame"
+    );
     const data = await resp.json();
     return data.results;
   } catch (err) {
@@ -49,7 +62,6 @@ export const singlePage = createAsyncThunk(
         `https://api.unsplash.com/photos/${id}?client_id=1ImbsBsOVc9Ns6T4zmkFMuhIvdejywf8b3Mh96Tr6-g`
       );
       const data = await resp.json();
-      console.log(data);
       return data;
     } catch (err) {
       console.log(err);
@@ -69,6 +81,8 @@ const initialState: initialStateType = {
   single_error: false,
   cart: [],
   frames: [],
+  frame_error: false,
+  frame_loading: false,
 };
 
 const productSlice = createSlice({
@@ -82,19 +96,86 @@ const productSlice = createSlice({
       );
       state.filtered_products = newProducts;
     },
+    totalCarts(state) {
+      let total = 0;
+      for (let i = 0; i < state.cart.length; i++) {
+        total = Math.trunc(total + state.cart[i].total);
+      }
+      state.totals = total;
+    },
     addToCart(state, action) {
       const total = state.single_product.likes * action.payload;
-      const cart = {
-        image: state.single_product.urls.raw,
-        name: state.single_product.alt_description,
-        price: state.single_product.likes,
-        id: state.single_product.id,
-        amount: action.payload,
-        total: total,
-      };
-      const amount = state.cart.length + 1;
-      state.amount = amount;
-      state.cart = [...state.cart, cart];
+      if (state.cart.length > 0) {
+        const item = state.cart.find((c) => c.id === state.single_product.id);
+        if (item) {
+          item.amount = item.amount + action.payload;
+          item.total = state.single_product.likes * item.amount;
+        } else {
+          const cart = {
+            image: state.single_product.urls.raw,
+            name: state.single_product.alt_description,
+            price: state.single_product.likes,
+            id: state.single_product.id,
+            amount: action.payload,
+            total: total,
+          };
+          const amount = state.cart.length + 1;
+          state.amount = amount;
+          state.cart = [...state.cart, cart];
+        }
+      } else {
+        const cart = {
+          image: state.single_product.urls.raw,
+          name: state.single_product.alt_description,
+          price: state.single_product.likes,
+          id: state.single_product.id,
+          amount: action.payload,
+          total: total,
+        };
+        const amount = state.cart.length + 1;
+        state.amount = amount;
+        state.cart = [...state.cart, cart];
+      }
+    },
+    addFrameToCart(state, action) {
+      const { likes, urls, id, alt_description } = action.payload;
+      const total = likes * 1;
+      if (state.cart.length > 0) {
+        const item = state.cart.find((c) => c.id === id);
+        if (item) {
+          item.amount = item.amount;
+          item.total = likes * item.amount;
+        } else {
+          const cart = {
+            image: urls.raw,
+            name: alt_description,
+            price: likes,
+            id: id,
+            amount: 1,
+            total: total,
+          };
+          const amount = state.cart.length + 1;
+          state.amount = amount;
+          state.cart = [...state.cart, cart];
+        }
+      } else {
+        const cart = {
+          image: urls.raw,
+          name: alt_description,
+          price: likes,
+          id: id,
+          amount: 1,
+          total: total,
+        };
+        const amount = state.cart.length + 1;
+        state.amount = amount;
+        state.cart = [...state.cart, cart];
+      }
+    },
+    removeCart(state, action) {
+      const newCart = state.cart.filter((c) => c.id !== action.payload);
+      state.cart = newCart;
+      state.amount = state.amount - 1;
     },
   },
   extraReducers: (builder) => {
@@ -139,10 +220,24 @@ const productSlice = createSlice({
       .addCase(singlePage.rejected, (state) => {
         state.single_loading = false;
         state.single_error = true;
+      })
+      .addCase(getFrames.pending, (state) => {
+        state.frame_loading = true;
+        state.frame_error = false;
+      })
+      .addCase(getFrames.fulfilled, (state, action) => {
+        state.frame_loading = false;
+        state.frames = action.payload;
+        console.log(action.payload);
+      })
+      .addCase(getFrames.rejected, (state) => {
+        state.frame_loading = false;
+        state.frame_error = true;
       });
   },
 });
 
-export const { priceRange, addToCart } = productSlice.actions;
+export const { priceRange, addToCart, totalCarts, removeCart, addFrameToCart } =
+  productSlice.actions;
 
 export default productSlice.reducer;

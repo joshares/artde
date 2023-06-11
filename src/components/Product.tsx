@@ -19,6 +19,7 @@ export default function Product({ product }: ProductPropType) {
     id,
   } = product;
   const [love, setLove] = useState<boolean>(false);
+
   return (
     <main className="w-full shadow-md ">
       <Link href={`market/${id}`}>

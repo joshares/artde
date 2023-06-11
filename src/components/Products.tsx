@@ -9,6 +9,14 @@ export default function Products() {
     (state: ProductStateType) => state.product
   );
 
+  if (products.length < 1) {
+    return (
+      <main className="w-full text-center text-xl uppercase my-5">
+        <p className="text-center"> No item found, try searching.</p>
+      </main>
+    );
+  }
+
   return (
     <main className="w-full flex my-5 flex-col gap-5 md:grid grid-cols-3">
       {products.map((product: ProductType, i: number) => {

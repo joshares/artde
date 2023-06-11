@@ -4,9 +4,8 @@ import Carts from "component/components/Carts";
 import { useSelector } from "react-redux";
 import { ProductStateType } from "component/types";
 
-// const data = [1, 2];
 export default function Cart() {
-  const { cart, amount } = useSelector(
+  const { cart, amount, totals } = useSelector(
     (state: ProductStateType) => state.product
   );
 
@@ -31,22 +30,25 @@ export default function Cart() {
       <footer className="md:flex-row flex-col flex md:justify-between uppercase ">
         <section className="md:w-1/2">
           <div className="flex justify-between items-center">
-            <p>Product in C:</p>
-            <p>1 items</p>
+            <p>Products in cart:</p>
+            <p>{amount} items</p>
           </div>
           <div className="flex justify-between items-center">
             <p>Shipping:</p>
-            <p>1 items</p>
+            <p>$25</p>
           </div>
           <div className="flex justify-between items-center">
             <p>Total:</p>
-            <p>$45</p>
+            <p>${totals + 25}</p>
           </div>
         </section>
         <section className="flex flex-col gap-2 justify-center items-center md:w-1/2">
-          <button className="bg-secondary text-white p-2 px-4 uppercase">
+          <Link
+            href="/payment"
+            className="bg-secondary text-white p-2 px-4 uppercase"
+          >
             proceed to payment
-          </button>
+          </Link>
           <Link href="market" className="text-secondary p-2 px-4">
             go to market
           </Link>

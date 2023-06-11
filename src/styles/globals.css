@@ -11,3 +11,79 @@
     font-family: "Crimson Text", serif;
   }
 }
+
+@layer components {
+  .scrolling-page {
+    height: 2000px;
+  }
+
+  .scrolling-item {
+    opacity: 0;
+  }
+
+  .animate-slide {
+    opacity: 1;
+    animation-name: slideIn;
+    animation-duration: 1s;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateY(50px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .auto-slider {
+    position: relative;
+    overflow: hidden;
+    height: 18em;
+  }
+  .auto-slider > * {
+    position: absolute;
+    left: 100%;
+    right: 0;
+    animation: 15s autoplay infinite ease-in-out;
+  }
+  @keyframes autoplay {
+    0% {
+      left: 100%;
+    }
+    4% {
+      left: 0%;
+    }
+    16.33% {
+      left: 0%;
+    }
+    22.33% {
+      left: 0%;
+    }
+    25.33% {
+      left: -100%;
+    }
+    100% {
+      left: -100%;
+    }
+  }
+  .auto-slider > *:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .auto-slider > *:nth-child(2) {
+    animation-delay: 3s;
+  }
+  .auto-slider > *:nth-child(3) {
+    animation-delay: 6s;
+  }
+  .auto-slider > *:nth-child(4) {
+    animation-delay: 9s;
+  }
+  .auto-slider > *:nth-child(5) {
+    animation-delay: 12s;
+  }
+}

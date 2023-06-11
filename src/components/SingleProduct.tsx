@@ -4,8 +4,9 @@ import { BsCart } from "react-icons/bs";
 import Link from "next/link";
 import { SingleProductType } from "component/types";
 import demo from "../../public/ads1.png";
-import { addToCart } from "component/features/product/productSlice";
+import { addToCart, totalCarts } from "component/features/product/productSlice";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 type singlePropType = {
   product: SingleProductType;
@@ -32,6 +33,12 @@ export default function SingleProduct({ product }: singlePropType) {
     }
   };
 
+  const addToCarts = () => {
+    dispatch(addToCart(amount) as any);
+    dispatch(totalCarts() as any);
+    setAmount(1);
+    toast.success("Added to cart");
+  };
   return (
     <main>
       <div className="md:flex items-center gap-5">
@@ -68,7 +75,7 @@ export default function SingleProduct({ product }: singlePropType) {
           </div>
           <button
             className="flex items-center gap-2 bg-secondary p-2 text-white rounded-md shadow-md"
-            onClick={() => dispatch(addToCart(amount) as any)}
+            onClick={() => addToCarts()}
           >
             <BsCart />
             <p>Add to cart</p>

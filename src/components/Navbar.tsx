@@ -12,8 +12,6 @@ export default function Navbar() {
   const { amount } = useSelector((store: ProductStateType) => store.product);
   const dispatch = useDispatch();
 
-  console.log(amount);
-
   return (
     <main className="relative ">
       <nav className="p-4 md:mx-14 flex justify-between items-center">
@@ -57,7 +55,7 @@ export default function Navbar() {
         </section>
       </nav>
       {open && (
-        <aside className="flex md:hidden absolute w-full top-0">
+        <aside className="flex md:hidden absolute w-full z-40 top-0">
           <ul className="w-2/3 p-4 bg-white shadow-md h-screen flex flex-col gap-4">
             <Link
               onClick={() => setOpen(!open)}

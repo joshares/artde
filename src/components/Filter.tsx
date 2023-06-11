@@ -15,7 +15,7 @@ export default function Filter() {
   };
   const dispatch = useDispatch();
   return (
-    <main className="w-full class p-4 bg-secondary text-white flex flex-col gap-5 my-5">
+    <main className="w-full class p-4 bg-secondary text-white flex flex-col gap-5 my-5 md:sticky md:top-0">
       <header className="flex justify-between items-center w-full text-2xl uppercase">
         <p>Filter</p>
         <BsFilterLeft />

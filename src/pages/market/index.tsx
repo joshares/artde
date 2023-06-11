@@ -37,10 +37,10 @@ export default function Market() {
   }
 
   return (
-    <main className="p-4 md:mx-14">
+    <main className="p-4 md:mx-14 ">
       <Header head="market" heading="every product is unique" />
       <section className="w-full flex md:flex-row flex-col gap-5">
-        <div className="md:w-1/4">
+        <div className="md:w-1/4 ">
           <Filter />
         </div>
         <div className="md:w-3/4">
