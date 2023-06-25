@@ -3,8 +3,14 @@ import Link from "next/link";
 import Carts from "component/components/Carts";
 import { useSelector } from "react-redux";
 import { ProductStateType } from "component/types";
+import { getSession } from "next-auth/react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
+import { getServerSideProps } from "../../authorization/Authorization";
 
 export default function Cart() {
+  const router = useRouter();
   const { cart, amount, totals } = useSelector(
     (state: ProductStateType) => state.product
   );
@@ -57,3 +63,5 @@ export default function Cart() {
     </main>
   );
 }
+
+export { getServerSideProps };

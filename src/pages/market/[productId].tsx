@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ProductStateType } from "component/types";
 import { useEffect } from "react";
 import { singlePage } from "component/features/product/productSlice";
+import { getServerSideProps } from "../../../authorization/Authorization";
 
 export default function SingleProducts() {
   const router = useRouter();
@@ -52,3 +53,5 @@ export default function SingleProducts() {
     </main>
   );
 }
+
+export { getServerSideProps };

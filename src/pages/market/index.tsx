@@ -3,10 +3,11 @@ import Header from "component/components/Header";
 import Filter from "component/components/Filter";
 import Newsletter from "component/components/Newsletter";
 import Products from "component/components/Products";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "component/features/product/productSlice";
 import { ProductStateType } from "component/types";
+import { useState, useEffect } from "react";
+import { getServerSideProps } from "../../../authorization/Authorization";
 
 export default function Market() {
   const {
@@ -28,6 +29,7 @@ export default function Market() {
       </main>
     );
   }
+
   if (error) {
     return (
       <main className="mx-auto p-4 md:mx-14">
@@ -51,3 +53,5 @@ export default function Market() {
     </main>
   );
 }
+
+export { getServerSideProps };

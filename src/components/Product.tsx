@@ -24,9 +24,9 @@ export default function Product({ product }: ProductPropType) {
     <main className="w-full shadow-md ">
       <Link href={`market/${id}`}>
         <Image
-          src={urls.full}
-          width={800}
-          height={800}
+          src={product?.urls.full}
+          width={width}
+          height={height}
           alt="product"
           priority
           className="w-full h-60 "

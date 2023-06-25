@@ -7,9 +7,13 @@ import Popular from "component/components/Popular";
 import Social from "component/components/Social";
 import React, { useEffect, useState } from "react";
 import { Transition } from "@headlessui/react";
+import { useRouter } from "next/router";
+import { getServerSideProps } from "../../authorization/Authorization";
 
 export default function Home() {
   const [visible, setVisible] = useState(false);
+  const [load, setLoad] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,6 +33,11 @@ export default function Home() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  // if (!session) {
+  //   router.replace("/login");
+  //   return null;
+  // }
 
   return (
     <main className="p-4 md:mx-14">
@@ -52,3 +61,5 @@ export default function Home() {
     </main>
   );
 }
+
+export { getServerSideProps };

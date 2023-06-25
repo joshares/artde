@@ -27,8 +27,8 @@ export default function Frame({ frame }: FramePropType) {
     <main className="w-full shadow-md ">
       <Image
         src={urls.raw}
-        width={800}
-        height={800}
+        width={width}
+        height={height}
         alt="product"
         priority
         className="w-full h-60 "

@@ -1,9 +1,13 @@
 import React from "react";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
-export default function Payment() {
+export default function Payment({ handleSubmit }: any) {
+  const router = useRouter();
+
   return (
     <main className="md:w-2/3 mx-auto">
-      <form>
+      <form onSubmit={handleSubmit}>
         <article className="flex flex-col gap-5">
           <header className=" text-center uppercase my-5">
             <p>billing address</p>

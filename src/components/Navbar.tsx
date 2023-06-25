@@ -6,11 +6,30 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { AiOutlineMenu, AiOutlineUser } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
 import { ProductStateType } from "component/types";
+import { useSession, signOut } from "next-auth/react";
+import { Session } from "next-auth";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { amount } = useSelector((store: ProductStateType) => store.product);
   const dispatch = useDispatch();
+  const { data: session, status: loading } = useSession();
+
+  const firstName = (session: Session | null) => {
+    if (session) {
+      const { fullName }: any = session.user;
+      const { name }: any = session.user;
+      if (fullName) {
+        const split = fullName.split(" ");
+        return split[0];
+      } else if (name) {
+        const split = name.split(" ");
+        return split[0];
+      }
+    } else {
+      return "user";
+    }
+  };
 
   return (
     <main className="relative ">
@@ -43,6 +62,7 @@ export default function Navbar() {
           </li>
         </ul>
         <section className="flex items-center gap-4 ">
+          <p>Welcome {firstName(session)}</p>
           <AiOutlineUser />
           <Link
             href="/cart"
@@ -51,7 +71,14 @@ export default function Navbar() {
             <CiShoppingCart />
             <p>{amount} items</p>
           </Link>
-          <button>Login</button>
+          {!session && loading === "unauthenticated" && (
+            <Link href="/login">Login</Link>
+          )}
+          {session && (
+            <Link href="/api/auth/signout">
+              <p onClick={() => signOut()}>Logout</p>
+            </Link>
+          )}
         </section>
       </nav>
       {open && (

@@ -44,10 +44,10 @@ export default function SingleProduct({ product }: singlePropType) {
       <div className="md:flex items-center gap-5">
         <section className="md:w-1/2">
           <Image
-            src={urls?.full}
+            src={product?.urls?.full}
             // src={demo}
-            width={800}
-            height={800}
+            width={width}
+            height={height}
             alt="demo"
             className="w-full h-72"
           />

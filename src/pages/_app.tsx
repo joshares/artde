@@ -6,14 +6,17 @@ import { store } from "component/store";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { SessionProvider } from "next-auth/react";
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps, router }: AppProps) {
+  const isLoginPage =
+    router.pathname === "/login" || router.pathname === "/signup";
   return (
-    <>
+    <SessionProvider session={pageProps.session}>
       <Provider store={store}>
-        <Navbar />
+        {!isLoginPage && <Navbar />}
         <Component {...pageProps} />
-        <Footer />
+        {!isLoginPage && <Footer />}
         <ToastContainer
           position="top-left"
           autoClose={5000}
@@ -27,6 +30,6 @@ export default function App({ Component, pageProps }: AppProps) {
           theme="colored"
         />
       </Provider>
-    </>
+    </SessionProvider>
   );
 }

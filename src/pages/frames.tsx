@@ -1,17 +1,18 @@
 import FramesProduct from "component/components/FramesProduct";
 import Header from "component/components/Header";
 import Newsletter from "component/components/Newsletter";
-import React, { useEffect } from "react";
 import { getFrames } from "component/features/product/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ProductStateType } from "component/types";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { getServerSideProps } from "../../authorization/Authorization";
 
 export default function Frames() {
   const dispatch = useDispatch();
   const { frame_loading: loading, frame_error: error } = useSelector(
     (state: ProductStateType) => state.product
   );
-
   useEffect(() => {
     dispatch(getFrames() as any);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -40,3 +41,5 @@ export default function Frames() {
     </main>
   );
 }
+
+export { getServerSideProps };
