@@ -16,6 +16,8 @@ type initialValuesTypes = {
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState<string>("");
+  const [load, setload] = useState(false);
+
   const [password, setPassword] = useState("");
   const router = useRouter();
   const [submitError, setSubmitError] = useState("");
@@ -29,7 +31,7 @@ export default function LoginForm() {
   };
 
   const onSubmit = async (values: initialValuesTypes) => {
-    console.log(values, submitError);
+    setload(true);
     try {
       const loginRes = await signIn("credentials", {
         redirect: false,
@@ -124,7 +126,7 @@ export default function LoginForm() {
           type="submit"
           className="py-2  text-lg font-medium bg-purpleLura text-white rounded-md bg-secondary w-full"
         >
-          Login
+          {load ? "loading..." : "Login"}
         </button>
         {submitError && (
           <p className="text-rose-500 text-sm font-medium mx-auto text-center">

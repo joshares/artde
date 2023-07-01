@@ -8,6 +8,7 @@ import { getProducts } from "component/features/product/productSlice";
 import { ProductStateType } from "component/types";
 import { useState, useEffect } from "react";
 import { getServerSideProps } from "../../../authorization/Authorization";
+import Loading from "component/components/Loading";
 
 export default function Market() {
   const {
@@ -24,8 +25,8 @@ export default function Market() {
 
   if (loading) {
     return (
-      <main className="mx-auto p-4 md:mx-14">
-        <p className="text-center text-3xl">Loading...</p>
+      <main className="mx-auto p-4 md:mx-14 text-center text-2xl mx-">
+        <Loading />
       </main>
     );
   }

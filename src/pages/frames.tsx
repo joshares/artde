@@ -7,6 +7,7 @@ import { ProductStateType } from "component/types";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { getServerSideProps } from "../../authorization/Authorization";
+import Loading from "component/components/Loading";
 
 export default function Frames() {
   const dispatch = useDispatch();
@@ -20,8 +21,8 @@ export default function Frames() {
 
   if (loading) {
     return (
-      <main className="mx-auto p-4 md:mx-14">
-        <p className="text-center text-3xl">Loading...</p>
+      <main className="mx-auto p-4 md:mx-14 text-center text-2xl mx-">
+        <Loading />
       </main>
     );
   }

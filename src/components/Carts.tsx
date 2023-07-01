@@ -25,8 +25,8 @@ export default function Carts({ cart }: cartPropType) {
       <div className="md:w-1/2">
         <Image
           src={image}
-          width={800}
-          height={800}
+          width={400}
+          height={400}
           alt="demo"
           className="w-full h-52"
         />

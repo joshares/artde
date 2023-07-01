@@ -8,6 +8,7 @@ import { ProductStateType } from "component/types";
 import { useEffect } from "react";
 import { singlePage } from "component/features/product/productSlice";
 import { getServerSideProps } from "../../../authorization/Authorization";
+import Loading from "component/components/Loading";
 
 export default function SingleProducts() {
   const router = useRouter();
@@ -27,8 +28,8 @@ export default function SingleProducts() {
 
   if (loading) {
     return (
-      <main className="text-center text-3xl">
-        <p>Loading</p>
+      <main className="mx-auto p-4 md:mx-14 text-center text-2xl mx-">
+        <Loading />
       </main>
     );
   }

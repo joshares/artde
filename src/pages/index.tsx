@@ -9,11 +9,24 @@ import React, { useEffect, useState } from "react";
 import { Transition } from "@headlessui/react";
 import { useRouter } from "next/router";
 import { getServerSideProps } from "../../authorization/Authorization";
+import { toast } from "react-toastify";
 
 export default function Home() {
   const [visible, setVisible] = useState(false);
   const [load, setLoad] = useState(true);
   const router = useRouter();
+
+  useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+    if (query.get("success")) {
+      toast.success("Order placed! You will receive an email confirmation.");
+    }
+
+    if (query.get("canceled")) {
+      toast.error("Order canceled");
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,11 +47,6 @@ export default function Home() {
     };
   }, []);
 
-  // if (!session) {
-  //   router.replace("/login");
-  //   return null;
-  // }
-
   return (
     <main className="p-4 md:mx-14">
       <Intro />
@@ -54,7 +62,7 @@ export default function Home() {
       >
         <Offer />
       </Transition>
-      <Popular />
+      {/* <Popular /> */}
       <Ads />
       <Newsletter />
       <Social />

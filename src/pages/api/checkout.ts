@@ -1,6 +1,6 @@
 // import { initMongoose } from "../../lib/mongoose";
-// import Product from "../../models/Product";
-// import Order from "../../models/Order";
+// // import Product from "../../models/Product";
+// // import Order from "../../models/Order";
 // const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 // export default async function handler(req, res) {
@@ -18,8 +18,8 @@
 
 //   let line_items = [];
 //   for (let productId of uniqIds) {
-//     const quantity = productsIds.filter((id) => id === productId).length;
-//     const product = products.find((p) => p._id.toString() === productId);
+//     const quantity = productsIds.filter((id: any) => id === productId).length;
+//     const product = products.find((p: any) => p._id.toString() === productId);
 //     line_items.push({
 //       quantity,
 //       price_data: {
