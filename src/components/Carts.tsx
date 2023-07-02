@@ -32,9 +32,9 @@ export default function Carts({ cart }: cartPropType) {
         />
       </div>
       <section className="md:w-1/2 flex flex-col md:justify-center items-center gap-3 uppercase md:gap-10">
-        <div className="flex justify-between w-full">
+        <div className="flex md:flex-row flex-col gap-3 justify-between w-full">
           <p>{name}</p>
-          <BsTrash onClick={() => handleClick()} />
+          <BsTrash className="text-xl" onClick={() => handleClick()} />
         </div>
         <div className="flex justify-between w-full capitalize">
           <div className="flex items-center gap-3">

@@ -41,7 +41,7 @@ export default function Footer() {
           <li>Address: Lagos, Nigeria.</li>
         </ul>
       </section>
-      <footer className="flex mt-8 justify-between text-[#65707D] border-t border-t-[#65707D]">
+      <footer className="flex md:flex-row flex-col mt-8 justify-between text-[#65707D] border-t border-t-[#65707D]">
         <div className="flex flex-row items-center w-1/2">
           <Image src={shop} alt="shop" className=" bg-primary" />
           <p>Copyright2023.Artde</p>

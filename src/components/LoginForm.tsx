@@ -44,6 +44,7 @@ export default function LoginForm() {
         router.push("/");
       }
     } catch (error) {
+      setload(false);
       console.log(error);
     }
   };
