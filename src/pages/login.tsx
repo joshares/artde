@@ -9,7 +9,7 @@ import { signIn } from "next-auth/react";
 export default function Login() {
   const handleGoggle = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    signIn("google", { callbackUrl: "http://localhost:3000" });
+    signIn("google", { callbackUrl: "https://artde.vercel.app" });
   };
   return (
     <main className="flex md:flex-row flex-col p-10">
