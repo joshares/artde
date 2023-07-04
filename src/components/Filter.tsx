@@ -25,7 +25,7 @@ export default function Filter() {
           value={search}
           onChange={handleChange}
           type="text"
-          className="w-full  border-none outline-none px-2 text-black rounded-l-md"
+          className="w-full  border-none outline-none px-2 text-black rounded-l-md rounded-r-none"
           placeholder="type product name"
         />
         <button

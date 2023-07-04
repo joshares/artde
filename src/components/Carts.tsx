@@ -28,7 +28,7 @@ export default function Carts({ cart }: cartPropType) {
           width={400}
           height={400}
           alt="demo"
-          className="w-full h-52"
+          className="w-full h-52 object-cover"
         />
       </div>
       <section className="md:w-1/2 flex flex-col md:justify-center items-center gap-3 uppercase md:gap-10">

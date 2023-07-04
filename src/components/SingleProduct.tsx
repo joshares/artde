@@ -49,7 +49,7 @@ export default function SingleProduct({ product }: singlePropType) {
             width={width}
             height={height}
             alt="demo"
-            className="w-full h-72"
+            className="w-full object-cover h-72"
           />
         </section>
         <section className=" my-5 flex flex-col gap-4 justify-center items-center md:w-1/2 md:justify-normal md:items-start md:my-0 md:h-72">

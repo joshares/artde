@@ -31,7 +31,7 @@ export default function Frame({ frame }: FramePropType) {
         height={height}
         alt="product"
         priority
-        className="w-full h-60 "
+        className="w-full h-60 object-cover"
       />
       <div className="flex justify-between  uppercase p-2">
         <p>
