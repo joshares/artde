@@ -74,10 +74,12 @@ export default function Filter() {
           <h1>Price</h1>
           <AiOutlineArrowRight />
         </header>
-        <ul className="flex flex-col gap-2 p-2 capitalize">
-          <li onClick={() => dispatch(priceRange(100))}>below $100</li>
-          <li onClick={() => dispatch(priceRange(500))}>below $500</li>
-          <li onClick={() => dispatch(priceRange(1000))}>below $1000</li>
+        <ul className="flex flex-col gap-2 p-2 capitalize items-start">
+          <button onClick={() => dispatch(priceRange(100))}>below $100</button>
+          <button onClick={() => dispatch(priceRange(500))}>below $500</button>
+          <button onClick={() => dispatch(priceRange(1000))}>
+            below $1000
+          </button>
         </ul>
       </section>
     </main>

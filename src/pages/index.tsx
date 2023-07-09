@@ -10,6 +10,7 @@ import { Transition } from "@headlessui/react";
 import { useRouter } from "next/router";
 import { getServerSideProps } from "../../authorization/Authorization";
 import { toast } from "react-toastify";
+import Layout from "../../Layout";
 
 export default function Home() {
   const [visible, setVisible] = useState(false);
@@ -28,44 +29,36 @@ export default function Home() {
     }
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop;
-      const windowHeight = window.innerHeight;
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const scrollTop =
+  //       window.pageYOffset || document.documentElement.scrollTop;
+  //     const windowHeight = window.innerHeight;
 
-      if (scrollTop > windowHeight * 0.1) {
-        setVisible(true);
-      } else {
-        setVisible(false);
-      }
-    };
+  //     if (scrollTop > windowHeight * 0.1) {
+  //       setVisible(true);
+  //     } else {
+  //       setVisible(false);
+  //     }
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
 
   return (
     <main className="p-4 md:mx-14">
-      <Intro />
-      <Icon />
-      <Transition
-        show={visible}
-        enter="transition duration-1000 transform"
-        enterFrom="opacity-0 translate-y-4"
-        enterTo="opacity-100 translate-y-0"
-        leave="transition duration-500 transform"
-        leaveFrom="opacity-100 translate-y-0"
-        leaveTo="opacity-0 translate-y-4"
-      >
+      <Layout>
+        <Intro />
+        <Icon />
         <Offer />
-      </Transition>
-      {/* <Popular /> */}
-      <Ads />
-      <Newsletter />
-      <Social />
+        {/* <Popular /> */}
+        <Ads />
+        <Newsletter />
+        <Social />
+      </Layout>
     </main>
   );
 }

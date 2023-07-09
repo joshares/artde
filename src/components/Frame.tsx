@@ -8,6 +8,7 @@ import {
   totalCarts,
 } from "component/features/product/productSlice";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 type FramePropType = {
   frame: ProductType;
@@ -21,6 +22,7 @@ export default function Frame({ frame }: FramePropType) {
   const handleClick = () => {
     dispatch(addFrameToCart({ likes, urls, id, alt_description }) as any);
     dispatch(totalCarts() as any);
+    toast.success("Frame is added to cart");
   };
 
   return (
